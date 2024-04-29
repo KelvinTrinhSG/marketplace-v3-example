@@ -8,6 +8,7 @@ import {
 } from "../../../const/addresses";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
+import { Planq } from "@thirdweb-dev/chains";
 
 type Props = {
     nft: NFT;
@@ -204,7 +205,11 @@ export default function TokenPage({ nft, contractMetadata }: Props) {
 export const getStaticProps: GetStaticProps = async (context) => {
     const tokenId = context.params?.tokenId as string;
   
-    const sdk = new ThirdwebSDK("mumbai");
+    const sdk = new ThirdwebSDK(Planq,
+        {
+            clientId: "655b6fab497583368cc6f8ee6e1183c3",
+        }
+    );
   
     const contract = await sdk.getContract(NFT_COLLECTION_ADDRESS);
   
@@ -226,7 +231,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 
   export const getStaticPaths: GetStaticPaths = async () => {
-    const sdk = new ThirdwebSDK("mumbai");
+    const sdk = new ThirdwebSDK(Planq,
+        {
+            clientId: "655b6fab497583368cc6f8ee6e1183c3",
+        }
+    );
   
     const contract = await sdk.getContract(NFT_COLLECTION_ADDRESS);
   
